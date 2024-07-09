@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">iRemember</string>
+
+    <string name="record_audiorecord">Record (AudioRecord)</string>
+    <string name="play_audiotrack">Play (AudioTrack)</string>
+    <string name="record_button_stop">Stop recording</string>
+    <string name="play_button_stop">Stop playing</string>
+    <string name="convert_button">Convert</string>
+    <string name="record_mediarecorder">Record (MediaRecorder)</string>
+    <string name="play_mediaplayer">Play (MediaPlayer)</string>
+
+
+    <string name="noconnection">" Kindly connect to a WIFI network or enable Mobile Data"</string>
+    <string name="Noitrenetconetion">Cannot connect to a servers</string>
+    <string name="YES">YES</string>
+    <string name="CANCEL">CANCEL</string>
+    <string name="DELETE">DELETE</string>
+    <string name="OPEN">OPEN</string>
+
+    <string name="version_unknown">Unknown</string>
+    <string name="app_version">Version</string>
+
+</resources>

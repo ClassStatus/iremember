@@ -1,0 +1,66 @@
+[versions]
+agp = "8.3.1"
+androidxJunit = "1.1.5"
+appcompatVersion = "1.6.1"
+coreKtx = "1.13.1"
+espressoCoreVersion = "3.5.1"
+firebaseAuth = "23.0.0"
+firebaseBom = "33.1.1"
+glide = "3.7.0"
+glideVersion = "4.14.2"
+googleCloudSpeech = "1.22.3"
+googleCloudTranslate = "1.95.3"
+googleMaterial = "1.9.0"
+googleServices = "4.4.2"
+grpcOkhttp = "1.30.0"
+javaxAnnotationApi = "1.3.2"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+activity = "1.8.0"
+constraintlayout = "2.1.4"
+materialRipple = "1.0.2"
+materialVersion = "1.11.0"
+okhttp = "4.9.1"
+roomRuntime = "2.6.1"
+shimmer = "0.5.0"
+volley = "1.2.1"
+
+[libraries]
+appcompat-v161 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glideVersion" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+espresso-core-v351 = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCoreVersion" }
+firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-v4142 = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
+google-cloud-speech = { module = "com.google.cloud:google-cloud-speech", version.ref = "googleCloudSpeech" }
+google-cloud-translate = { module = "com.google.cloud:google-cloud-translate", version.ref = "googleCloudTranslate" }
+google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+grpc-okhttp = { module = "io.grpc:grpc-okhttp", version.ref = "grpcOkhttp" }
+grpc-protobuf-lite = { module = "io.grpc:grpc-protobuf-lite", version.ref = "grpcOkhttp" }
+grpc-stub = { module = "io.grpc:grpc-stub", version.ref = "grpcOkhttp" }
+javax-annotation-api = { module = "javax.annotation:javax.annotation-api", version.ref = "javaxAnnotationApi" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+junit-v115 = { module = "androidx.test.ext:junit", version.ref = "androidxJunit" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+material-ripple = { module = "com.balysv:material-ripple", version.ref = "materialRipple" }
+material-v1110 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+material-v190 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+volley = { module = "com.android.volley:volley", version.ref = "volley" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+
