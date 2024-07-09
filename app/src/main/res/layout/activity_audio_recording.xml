@@ -6,28 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/darkHome"
     tools:context=".AudioRecording">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:ignore="MissingConstraints">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Base.Theme.IRemember"
-        app:contentInsetStartWithNavigation="0dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:titleTextColor="@android:color/white"
-        tools:ignore="MissingConstraints" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/grey_90"
-        tools:ignore="MissingConstraints" />
-</LinearLayout>
+    <include
+        layout="@layout/toolbar" />
 
     <Button
         android:id="@+id/record_mediarecorder"

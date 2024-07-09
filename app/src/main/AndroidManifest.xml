@@ -33,6 +33,11 @@
         <activity android:name=".MainActivity"/>
      <activity android:name=".ActivityNotifications"
          android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.ProfileActivity"
+            android:theme="@style/AppTheme"/>
+
+
+
 
 
     </application>

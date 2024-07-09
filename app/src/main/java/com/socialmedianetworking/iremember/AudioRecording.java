@@ -121,6 +121,7 @@ public class AudioRecording extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.app_logo_news);
         actionBar.setTitle("Audio Recording");
         Tools.setSystemBarColorInt(this, getResources().getColor(R.color.darkHomeDark));
     }

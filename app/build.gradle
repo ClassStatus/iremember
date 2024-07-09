@@ -49,8 +49,9 @@ dependencies {
     implementation libs.appcompat.v161
     implementation libs.core.ktx
  //   implementation libs.firebase.auth
+    implementation libs.circleimageview
 
-
+  
 
 
 }
