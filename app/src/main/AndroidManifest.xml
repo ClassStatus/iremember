@@ -33,10 +33,7 @@
         <activity android:name=".MainActivity"/>
      <activity android:name=".ActivityNotifications"
          android:theme="@style/AppTheme"/>
-        <activity android:name=".OtpAuthActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".PhoneAuthActivity"
-            android:theme="@style/AppTheme"/>
+
 
     </application>
 

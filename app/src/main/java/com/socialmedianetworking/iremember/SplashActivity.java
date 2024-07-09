@@ -40,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
                     session.setFirstTimeLaunch(false);
                     startActivity(new Intent(SplashActivity.this, OnboardingActivity.class));
                 } else {
-                    startActivity(new Intent(SplashActivity.this, PhoneAuthActivity.class));
+                    startActivity(new Intent(SplashActivity.this, Login.class));
                 }
                 finish();
             }
