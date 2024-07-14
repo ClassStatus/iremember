@@ -98,7 +98,7 @@ public class UserSession {
 
         // user phone number
         user.put(KEY_MOBiLE, pref.getString(KEY_MOBiLE, null));
-        user.put(KEY_USER_ID, pref.getString(KEY_USER_ID, null));
+        user.put(KEY_USER_ID, pref.getString(KEY_USER_ID, "1"));
         user.put(USER_TYPE, pref.getString(USER_TYPE, null));
 
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));

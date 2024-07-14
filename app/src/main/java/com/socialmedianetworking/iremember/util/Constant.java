@@ -10,4 +10,7 @@ public class Constant {
 
     //fb
 
+    public static String POST_LIST = BASE_URL1+"json/get_all_group_posts";
+    public static String EDIT_PROFILE = BASE_URL1+"json/edit_profile";
+
 }

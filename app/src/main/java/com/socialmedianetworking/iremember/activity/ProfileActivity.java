@@ -2,6 +2,7 @@ package com.socialmedianetworking.iremember.activity;
 
 import static com.socialmedianetworking.iremember.util.Constant.ASSETS_URL;
 import static com.socialmedianetworking.iremember.util.Constant.BASE_URL;
+import static com.socialmedianetworking.iremember.util.Constant.EDIT_PROFILE;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -47,7 +48,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
     private ImageView backBtn,addImage,singOutBtn;
     private CircleImageView profileImage;
-    private EditText userName,userEmail;
+    private EditText userName,dob,gender;
     private EditText userPhone;
     private TextView saveBtn;
     String image1,profileimage;
@@ -87,7 +88,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.profileImage);
         userName = findViewById(R.id.userNameInProfile);
-        userEmail = findViewById(R.id.emailIdInProfile);
+        dob = findViewById(R.id.dateofbirth);
+        gender = findViewById(R.id.gender);
         userPhone = findViewById(R.id.phoneNumberIdInProfile);
         saveBtn = findViewById(R.id.saveProfileInformationButton);
         addImage = findViewById(R.id.addImage);
@@ -114,7 +116,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         userName.setText(name);
-        userEmail.setText(email);
         userPhone.setText(mobile);
         //profileImage.
 
@@ -151,8 +152,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void updateUserData(){
        String name = userName.getText().toString().trim();
-        String email = userEmail.getText().toString().trim();
         String phone = userPhone.getText().toString().trim();
+        String doteofbirth = dob.getText().toString().trim();
+        String genderstring = gender.getText().toString().trim();
 
 
 //        progressDialog=  KProgressHUD.create(ProfileActivity.this)
@@ -163,7 +165,7 @@ public class ProfileActivity extends AppCompatActivity {
 //                .setDimAmount(0.5f)
 //                .show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BASE_URL + "save_profile",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, EDIT_PROFILE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -175,7 +177,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                             if (status.equals("1"))
                             {
-                                Toast.makeText(getApplicationContext(),"Sucess",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
 
 
                             }else{
@@ -219,12 +221,13 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             protected Map<String, String> getParams() {
-
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id",user_id);
-                params.put("mobile" , phone  );
+                params.put("phonenumber" ,phone);
                 params.put("email",email);
-                params.put("name",name);
+                params.put("fullname",name);
+                params.put("gender",genderstring);
+                params.put("dob",doteofbirth);
                 Log.d("looooo", String.valueOf(params));
                 return params;
             }
@@ -309,9 +312,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.d("looooo", String.valueOf(params));
                 return params;
             }
-
         };
-
         App.getInstance().addToRequestQueue(stringRequest);
     }
 

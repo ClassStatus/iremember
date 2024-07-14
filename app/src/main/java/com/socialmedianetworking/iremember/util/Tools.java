@@ -14,13 +14,20 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -57,6 +64,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Locale;
 
@@ -494,6 +504,125 @@ public class Tools {
             return false;
         }
     }
+
+    public static Bitmap createTextBitmap(String text, Context context, int padding) {
+        // Initialize TextPaint
+        TextPaint textPaint = new TextPaint();
+        textPaint.setColor(Color.BLACK);
+
+        // Calculate text size based on device density
+        float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        int textSizePx = (int) (22 * scaledDensity); // Example text size (adjust as needed)
+        textPaint.setTextSize(textSizePx);
+        textPaint.setTextAlign(Paint.Align.CENTER);
+
+        // Calculate text bounds with wrapping
+        int maxWidth = getScreenWidth(context); // Get screen width
+        int maxHeight = getScreenHeight(context); // Get screen height
+
+        StaticLayout staticLayout = new StaticLayout(text, textPaint, maxWidth - 2 * padding,
+                Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, false);
+
+        int textWidth = Math.min(staticLayout.getWidth(), maxWidth - 2 * padding);
+        int textHeight = staticLayout.getHeight();
+
+        // Ensure the bitmap is not larger than maxWidth and maxHeight
+        int bitmapWidth = Math.min(textWidth + 2 * padding, maxWidth);
+        int bitmapHeight = Math.min(textHeight + 2 * padding, maxHeight);
+
+        // Create a bitmap with calculated dimensions
+        Bitmap bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+
+        // Calculate x and y coordinates to center the text
+        float x = bitmapWidth / 2f;
+        float y = (bitmapHeight / 2f) - (staticLayout.getHeight() / 2f);
+
+        // Draw background (optional)
+        Paint backgroundPaint = new Paint();
+        backgroundPaint.setColor(Color.GREEN); // Background color
+        canvas.drawRect(0, 0, bitmapWidth, bitmapHeight, backgroundPaint);
+
+        // Draw text on Canvas
+        canvas.translate(padding, padding); // Apply padding
+        staticLayout.draw(canvas);
+
+        return bitmap;
+    }
+
+    // Helper method to get screen width
+    private static int getScreenWidth(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return displayMetrics.widthPixels;
+    }
+
+    // Helper method to get screen height
+    private static int getScreenHeight(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return displayMetrics.heightPixels;
+    }
+
+
+
+
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    public static String getRelativeTime(String dateString) {
+        LocalDateTime postDateTime = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            postDateTime = LocalDateTime.parse(dateString, formatter);
+        }
+        LocalDateTime now = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            now = LocalDateTime.now();
+        }
+
+        long years = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            years = ChronoUnit.YEARS.between(postDateTime, now);
+        }
+        if (years > 0) return years + " year" + (years > 1 ? "s" : "") + " ago";
+
+        long months = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            months = ChronoUnit.MONTHS.between(postDateTime, now);
+        }
+        if (months > 0) return months + " month" + (months > 1 ? "s" : "") + " ago";
+
+        long weeks = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            weeks = ChronoUnit.WEEKS.between(postDateTime, now);
+        }
+        if (weeks > 0) return weeks + " week" + (weeks > 1 ? "s" : "") + " ago";
+
+        long days = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            days = ChronoUnit.DAYS.between(postDateTime, now);
+        }
+        if (days > 0) return days + " day" + (days > 1 ? "s" : "") + " ago";
+
+        long hours = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            hours = ChronoUnit.HOURS.between(postDateTime, now);
+        }
+        if (hours > 0) return hours + " hour" + (hours > 1 ? "s" : "") + " ago";
+
+        long minutes = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            minutes = ChronoUnit.MINUTES.between(postDateTime, now);
+        }
+        if (minutes > 0) return minutes + " minute" + (minutes > 1 ? "s" : "") + " ago";
+
+        long seconds = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            seconds = ChronoUnit.SECONDS.between(postDateTime, now);
+        }
+        if (seconds > 0) return seconds + " second" + (seconds > 1 ? "s" : "") + " ago";
+
+        return "just now";
+    }
+
 
 
 }

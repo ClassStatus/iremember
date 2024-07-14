@@ -50,6 +50,14 @@ dependencies {
     implementation libs.core.ktx
  //   implementation libs.firebase.auth
     implementation libs.circleimageview
+    implementation libs.recyclerview
+    implementation libs.glide.v4120
+    annotationProcessor libs.compiler
+
+    // If you are using AndroidX
+    implementation libs.fragment
+
+
 
   
 

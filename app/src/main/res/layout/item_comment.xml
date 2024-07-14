@@ -1,0 +1,134 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_replies"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- User profile image -->
+        <ImageView
+            android:id="@+id/image_profile_reply"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/logo_small_round"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="10dp"/>
+
+        <!-- User name and timestamp -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- User name -->
+                <TextView
+                    android:id="@+id/text_username_reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="John Doe"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/text_reply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Reply"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+            <!-- Timestamp -->
+            <TextView
+                android:id="@+id/text_timestamp_reply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2 hours ago"
+                android:textSize="10sp"
+                android:textColor="@android:color/darker_gray"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Single reply item -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical">
+
+        <!-- Play/Pause button for audio -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play"
+            android:visibility="invisible"
+            android:layout_marginEnd="10dp"/>
+
+        <ImageView
+            android:id="@+id/image_play_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play"
+            />
+
+        <ImageView
+            android:id="@+id/image_play_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:src="@drawable/pause"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/audiowave"/>
+
+        </LinearLayout>
+
+        <!-- Audio loading indicator (optional) -->
+        <ProgressBar
+            android:id="@+id/progress_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginEnd="10dp"/>
+
+        <!-- Audio duration (optional) -->
+        <TextView
+            android:id="@+id/text_audio_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0:30"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:visibility="gone"/>
+
+        <!-- Reply text (optional) -->
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        />
+
+</LinearLayout>

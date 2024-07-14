@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.socialmedianetworking.iremember.activity.ProfileActivity;
+
 
 public class Login extends AppCompatActivity {
 
@@ -62,7 +64,7 @@ public class Login extends AppCompatActivity {
         }
 
         // TODO: Implement authentication logic here
-        startActivity(new Intent(Login.this,MainActivity.class));
+        startActivity(new Intent(Login.this, MainActivity.class));
         Toast.makeText(this, "Sign In Clicked", Toast.LENGTH_SHORT).show();
     }
 

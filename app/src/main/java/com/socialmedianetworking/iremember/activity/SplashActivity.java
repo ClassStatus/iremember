@@ -1,12 +1,14 @@
-package com.socialmedianetworking.iremember;
+package com.socialmedianetworking.iremember.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.socialmedianetworking.iremember.Login;
+import com.socialmedianetworking.iremember.OnboardingActivity;
+import com.socialmedianetworking.iremember.R;
 import com.socialmedianetworking.iremember.room.AppDatabase;
 import com.socialmedianetworking.iremember.room.DAO;
 import com.socialmedianetworking.iremember.util.UserSession;
