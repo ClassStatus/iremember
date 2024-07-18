@@ -53,6 +53,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 holder.image_play_pause.setVisibility(View.GONE);
             }
         });
+
+        holder.text_reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         // Additional code to handle audio file if needed
     }
 
@@ -67,7 +74,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     public static class CommentViewHolder extends RecyclerView.ViewHolder {
         TextView username;
-        TextView commentCreatedAt;
+        TextView commentCreatedAt,text_reply;
         ImageView image_play_play,image_play_pause;
         // Add additional views if needed
 
@@ -77,6 +84,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             commentCreatedAt = itemView.findViewById(R.id.text_timestamp_reply);
             image_play_pause = itemView.findViewById(R.id.image_play_pause);
             image_play_play = itemView.findViewById(R.id.image_play_play);
+            text_reply = itemView.findViewById(R.id.text_reply);
         }
     }
 }

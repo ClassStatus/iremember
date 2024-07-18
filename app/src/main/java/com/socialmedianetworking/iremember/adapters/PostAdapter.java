@@ -3,6 +3,7 @@ package com.socialmedianetworking.iremember.adapters;
 import static com.socialmedianetworking.iremember.util.Tools.createTextBitmap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.util.Util;
+import com.socialmedianetworking.iremember.Login;
+import com.socialmedianetworking.iremember.MainActivity;
 import com.socialmedianetworking.iremember.R;
+import com.socialmedianetworking.iremember.activity.ProfileActivity;
 import com.socialmedianetworking.iremember.model.Commentmodel;
 import com.socialmedianetworking.iremember.model.Post;
 
@@ -90,6 +94,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }else{
         holder.text_post_content.setText(post.getContent_text());
         }
+
+        //remove when
+        holder.content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ProfileActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
