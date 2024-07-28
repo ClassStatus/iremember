@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.button.MaterialButton;
+import com.socialmedianetworking.iremember.activity.Login;
 import com.socialmedianetworking.iremember.adapters.OnboardingAdapter;
 
 public class OnboardingActivity extends AppCompatActivity {

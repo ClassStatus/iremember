@@ -9,11 +9,11 @@ public class Post {
     private String adminId;
     private String content;
     private String createdAt;
-    private String content_text;
+    private String content_text,post_uploader_profile_image,post_uploaded_fullname;
     private int isImage;
     private List<Commentmodel> comments;
 
-    public Post(String postId, String groupId, String adminId, String content,String content_text,int isImage, String createdAt, List<Commentmodel> comments) {
+    public Post(String postId, String groupId, String adminId, String content,String content_text,int isImage, String createdAt,String post_uploader_profile_image, String post_uploaded_fullname, List<Commentmodel> comments) {
         this.postId = postId;
         this.groupId = groupId;
         this.adminId = adminId;
@@ -21,7 +21,25 @@ public class Post {
         this.content_text = content_text;
         this.isImage = isImage;
         this.createdAt = createdAt;
+        this.post_uploader_profile_image = post_uploader_profile_image;
+        this.post_uploaded_fullname = post_uploaded_fullname;
         this.comments = comments;
+    }
+
+    public String getPost_uploaded_fullname() {
+        return post_uploaded_fullname;
+    }
+
+    public void setPost_uploaded_fullname(String post_uploaded_fullname) {
+        this.post_uploaded_fullname = post_uploaded_fullname;
+    }
+
+    public String getPost_uploader_profile_image() {
+        return post_uploader_profile_image;
+    }
+
+    public void setPost_uploader_profile_image(String post_uploader_profile_image) {
+        this.post_uploader_profile_image = post_uploader_profile_image;
     }
 
     public String getContent_text() {

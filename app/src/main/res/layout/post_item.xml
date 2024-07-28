@@ -23,7 +23,7 @@
 
             <!-- User profile image -->
             <ImageView
-                android:id="@+id/image_profile"
+                android:id="@+id/post_image_profile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/logo_small_round"
@@ -39,7 +39,7 @@
 
                 <!-- User name -->
                 <TextView
-                    android:id="@+id/text_username"
+                    android:id="@+id/post_text_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="John Doe"
@@ -104,13 +104,100 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:id="@+id/recording_section"
             android:orientation="vertical">
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     android:src="@drawable/o"/>
-            <
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:minHeight="250px"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/closeIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_close"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="Close"
+                    android:onClick="closeActivity"
+                    cardview:tint="@color/black" />
+
+                <Button
+                    android:id="@+id/btnStartRecording"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start Recording"
+                    android:layout_centerInParent="true" />
+
+                <Button
+                    android:id="@+id/btnStopRecording"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stop Recording"
+                    android:layout_below="@id/btnStartRecording"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone" /> <!-- Initially hidden -->
+
+                <Button
+                    android:id="@+id/btnUploadRecording"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload Recording"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_below="@id/btnStartRecording"
+                    android:layout_marginTop="16dp"
+                    /> <!-- Initially hidden -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnPlayRecording"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Play"
+                    />
+                <Button
+                    android:id="@+id/btnStopPlayingRecording"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:layout_below="@id/btnStopRecording"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="0dp"
+                    android:text="Stop" />
+</LinearLayout>
+                <ImageView
+                    android:id="@+id/deleteRecordingIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnStopRecording"
+                    android:src="@drawable/ic_delete"
+                    android:layout_alignParentEnd="true"
+                    android:visibility="gone"
+                    android:layout_alignParentBottom="true"
+                    android:contentDescription="Close"
+                    android:onClick="closeActivity"
+                    cardview:tint="@color/black" />
+
+            </RelativeLayout>
+
         </LinearLayout>
         <!-- Replies section -->
      <androidx.recyclerview.widget.RecyclerView
@@ -126,6 +213,34 @@
             android:text="ShowMore"
             android:textSize="12dp"/>
 
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/login_user_icon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logo_small_round"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="5dp"/>
+            <View
+                android:id="@+id/login_user_comment"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="5dp"
+                android:paddingStart="15dp"
+                android:background="@drawable/edit_text_back" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
+
+
 
 </androidx.cardview.widget.CardView>

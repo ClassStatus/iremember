@@ -6,13 +6,13 @@ public class Commentmodel {
     private String userId;
 
 
-    private String username;
+    private String username,pimage;
     private String audioFileId;
     private String audioFilePath;
     private String commentCreatedAt;
     private String audioUploadedAt;
 
-    public Commentmodel(String commentId, String userId, String username, String audioFileId, String audioFilePath, String commentCreatedAt, String audioUploadedAt) {
+    public Commentmodel(String commentId, String userId, String username, String audioFileId, String audioFilePath, String commentCreatedAt, String audioUploadedAt,String pimage) {
         this.commentId = commentId;
         this.userId = userId;
         this.username = username;
@@ -20,6 +20,15 @@ public class Commentmodel {
         this.audioFilePath = audioFilePath;
         this.commentCreatedAt = commentCreatedAt;
         this.audioUploadedAt = audioUploadedAt;
+        this.pimage = pimage;
+    }
+
+    public String getPimage() {
+        return pimage;
+    }
+
+    public void setPimage(String pimage) {
+        this.pimage = pimage;
     }
 
     public String getCommentId() {

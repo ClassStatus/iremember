@@ -97,9 +97,9 @@ public class ProfileActivity extends AppCompatActivity {
         session.isLoggedIn();
         user = session.getUserDetails();
         user_id = user.get(UserSession.KEY_USER_ID);
-        name = user.get(UserSession.KEY_NAME);
+        name = user.get(UserSession.KEY_FULL_NAME);
         email = user.get(UserSession.KEY_EMAIL);
-        mobile = user.get(UserSession.KEY_MOBiLE);
+        mobile = user.get(UserSession.KEY_PHONE_NUMBER);
 
 
 
@@ -109,17 +109,20 @@ public class ProfileActivity extends AppCompatActivity {
         profileImage = findViewById(R.id.profileImage);
         userName = findViewById(R.id.userNameInProfile);
         dob = findViewById(R.id.dateofbirth);
+        dob.setText(user.get(UserSession.KEY_DOB));
         gender = findViewById(R.id.gender);
+        //Log.d("Gender----",user.get(UserSession.KEY_GENDER));
+        gender.setText(user.get(UserSession.KEY_GENDER));
         userPhone = findViewById(R.id.phoneNumberIdInProfile);
         saveBtn = findViewById(R.id.saveProfileInformationButton);
         addImage = findViewById(R.id.addImage);
         singOutBtn = findViewById(R.id.signOut);
         image = user.get(UserSession.KEY_P_IMAGE);
-//        Glide
-//                .with(this)
-//                .load(ASSETS_URL+image)
-//                .placeholder(R.drawable.profile)
-//                .into(profileImage);
+        Glide
+                .with(this)
+                .load(ASSETS_URL+image)
+                .placeholder(R.drawable.profile)
+                .into(profileImage);
 
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +168,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void updateUserData(){
-       String name = userName.getText().toString().trim();
+        String name = userName.getText().toString().trim();
         String phone = userPhone.getText().toString().trim();
         String doteofbirth = dob.getText().toString().trim();
         String genderstring = gender.getText().toString().trim();

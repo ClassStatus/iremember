@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".activity.Login">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -66,14 +66,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Member Id"
                     android:layout_marginStart="15dp"
+                    android:text="Email"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/memberIdLogIn"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:inputType="textEmailAddress"
                     android:layout_marginTop="5dp"
                     android:paddingStart="15dp"
                     android:background="@drawable/edit_text_back" />
@@ -157,7 +158,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
                 android:layout_gravity="center"
                 android:gravity="center"
                 >

@@ -4,6 +4,7 @@ package com.socialmedianetworking.iremember;
 import static com.socialmedianetworking.iremember.util.Constant.POST_LIST;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,10 +40,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
+    CircleImageView profileIcon;
     StringRequest stringRequest;
     //List<Post> posts  = new ArrayList<>();
     ArrayList<Post> posts = new ArrayList<>();
@@ -53,7 +59,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
+        profileIcon = findViewById(R.id.profileIcon);
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            }
+        });
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE);
+//        }
         parseJsonResponse();
         //startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 
@@ -98,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
                                                 commentObject.getString("audio_file_id"),
                                                 commentObject.getString("audio_file_path"),
                                                 commentObject.getString("comment_created_at"),
-                                                commentObject.getString("audio_uploaded_at")
+                                                commentObject.getString("audio_uploaded_at"),
+                                                commentObject.getString("pimage")
                                         );
                                         comments.add(comment);
                                     }
@@ -110,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
                                             o.getString("content_text"),
                                             o.getInt("isImage"),
                                             o.getString("created_at"),
+                                            o.getString("post_uploader_profile_image"),
+                                            o.getString("post_uploaded_fullname"),
                                             comments
                                     );
                                     posts.add(newdata);
@@ -140,10 +158,10 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setVisibility(View.GONE);
                 NetworkResponse networkResponse = error.networkResponse;
                 if (networkResponse != null) {
-                    Log.e("VolleyError", "Status code: " + networkResponse.statusCode);
-                    Log.e("VolleyError", "Data: " + new String(networkResponse.data));
+                    Log.e("VolleyError1", "Status code: " + networkResponse.statusCode);
+                    Log.e("VolleyError2", "Data: " + new String(networkResponse.data));
                 }
-                Log.e("VolleyError", error.toString());
+                Log.e("VolleyError3", error.toString());
                // nopro.setVisibility(View.VISIBLE);
             }
         }) {

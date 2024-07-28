@@ -1,5 +1,8 @@
 package com.socialmedianetworking.iremember.util;
 
+import static com.socialmedianetworking.iremember.util.Constant.UPLOAD_URL;
+import static com.socialmedianetworking.iremember.util.Constant.USER_RECORDING_COMMENT;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -27,6 +30,7 @@ import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -53,13 +57,30 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.core.widget.NestedScrollView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.socialmedianetworking.iremember.MainActivity;
 import com.socialmedianetworking.iremember.R;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
@@ -68,7 +89,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class Tools {
@@ -623,6 +646,139 @@ public class Tools {
         return "just now";
     }
 
+    public static void uploadAudioFile(Context context, File filePath,String post_id,String user_id) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, USER_RECORDING_COMMENT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Handle response from server
+                        System.out.println("Response: " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                        System.err.println("Error: " + error.getMessage());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("file", encodeFileToBase64Binary(String.valueOf(filePath)));
+                params.put("post_id",post_id);
+                params.put("user_id",user_id);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
+    private static String encodeFileToBase64Binary(String filePath) {
+        File file = new File(filePath);
+        try (FileInputStream fileInputStreamReader = new FileInputStream(file);
+             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fileInputStreamReader.read(buffer)) != -1) {
+                byteArrayOutputStream.write(buffer, 0, bytesRead);
+            }
+            return android.util.Base64.encodeToString(byteArrayOutputStream.toByteArray(), android.util.Base64.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public static String generateFileName() {
+        LocalDateTime now = null;
+        DateTimeFormatter formatter = null;
+        String formattedDateTime = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            now = LocalDateTime.now();
+            formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+            formattedDateTime = now.format(formatter);
+        }
+        return formattedDateTime;
+    }
+
+    private static byte[] getFileDataFromDrawable(File file) {
+        byte[] data = new byte[(int) file.length()];
+        try (FileInputStream fis = new FileInputStream(file)) {
+            fis.read(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public static void uploadFile(Context context,String filePath,String postId,String userId) {
+        File audioFile = new File(filePath);
+        byte[] audioBytes = new byte[(int) audioFile.length()];
+
+        try (FileInputStream fis = new FileInputStream(audioFile)) {
+            fis.read(audioBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, USER_RECORDING_COMMENT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Handle server response
+                        Log.d("Server Response", response);
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(response);
+                            String status = jsonObject.getString("message");
+                            Toast.makeText(context, status, Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                        Log.e("Volley Error", error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("audio", Base64.encodeToString(audioBytes, Base64.DEFAULT));
+                params.put("post_id",postId);
+                params.put("user_id",userId);
+                return params;
+            }
+        };
+
+        App.getInstance().addToRequestQueue(stringRequest);
+
+    }
+
+    public static byte[] getFileDataFromPath(String filePath) {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                try {
+                    FileInputStream fis = new FileInputStream(filePath);
+                    byte[] buffer = new byte[1024];
+                    int n;
+                    while ((n = fis.read(buffer)) != -1) {
+                        bos.write(buffer, 0, n);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return bos.toByteArray();
+            }
 
 }

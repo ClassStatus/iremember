@@ -6,7 +6,6 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.socialmedianetworking.iremember.Login;
 import com.socialmedianetworking.iremember.OnboardingActivity;
 import com.socialmedianetworking.iremember.R;
 import com.socialmedianetworking.iremember.room.AppDatabase;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.socialmedianetworking.iremember.Login;
+import com.socialmedianetworking.iremember.activity.Login;
 
 import java.util.HashMap;
 
@@ -22,17 +22,19 @@ public class UserSession {
     private static final String PREF_NAME = "UserSessionPref";
     // First time logic Check
     public static final String TOKEN = "Tokennn";
-    public static final String KEY_USER_ID = "user_id";
-    public  static final String USER_TYPE = "user_type";
-    public static  final  String KEY_P_IMAGE = "p_image";
-    // All Shared Preferences Keys
+
     private static final String IS_LOGIN = "IsLoggedIn";
     // User name (make variable public to access from outside)
-    public static final String KEY_NAME = "name";
-    // Mobile number (make variable public to access from outside)
-    public static final String KEY_MOBiLE = "mobile";
+
+    public static final String KEY_USER_ID = "user_id";
+    public static final String KEY_FULL_NAME = "fullname";
+    public static final String KEY_PHONE_NUMBER = "phonenumber";
     public static final String KEY_EMAIL = "email";
-    public static final String KEY_CATEGORY = "category";
+    public static final String KEY_USERNAME = "username";
+    public static final String KEY_P_IMAGE = "pimage";
+    public static final String KEY_GENDER = "gender";
+    public static final String KEY_DOB = "dob";
+
     // check first time app launch
     public static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
@@ -46,19 +48,22 @@ public class UserSession {
     /**
      * Create login session
      * */
-
-    public void createLoginSession(String user_id,String name,String user_type,String email,String mobile,String p_image)
+//String user_id, String fullname, String phonenumber, String email, String username, String pimage, Stringgender,dob
+    public void createLoginSession(String user_id, String fullname, String phonenumber, String email, String username, String pimage, String gender,String dob)
     {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
         // Storing name in pref
-        editor.putString(KEY_NAME, name);
+        editor.putString(KEY_FULL_NAME, fullname);
         editor.putString(KEY_USER_ID, user_id);
-        editor.putString(USER_TYPE,user_type);
+        editor.putString(KEY_DOB,dob);
 
         editor.putString(KEY_EMAIL, email);
-        editor.putString(KEY_MOBiLE, mobile);
-        editor.putString(KEY_P_IMAGE,p_image);
+        editor.putString(KEY_GENDER, gender);
+        editor.putString(KEY_P_IMAGE,pimage);
+
+        editor.putString(KEY_USERNAME, username);
+        editor.putString(KEY_PHONE_NUMBER, phonenumber);
 
         editor.commit();
     }
@@ -94,13 +99,13 @@ public class UserSession {
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<>();
         // user name
-        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
+        user.put(KEY_FULL_NAME, pref.getString(KEY_FULL_NAME, null));
 
         // user phone number
-        user.put(KEY_MOBiLE, pref.getString(KEY_MOBiLE, null));
-        user.put(KEY_USER_ID, pref.getString(KEY_USER_ID, "1"));
-        user.put(USER_TYPE, pref.getString(USER_TYPE, null));
-
+        user.put(KEY_PHONE_NUMBER, pref.getString(KEY_PHONE_NUMBER, null));
+        user.put(KEY_USER_ID, pref.getString(KEY_USER_ID, "0"));
+        user.put(KEY_DOB, pref.getString(KEY_DOB, null));
+        user.put(KEY_GENDER,pref.getString(KEY_GENDER,"Male"));
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
         user.put(KEY_P_IMAGE, pref.getString(KEY_P_IMAGE, null));
 
@@ -116,10 +121,14 @@ public class UserSession {
     public void logoutUser(){
         // Clearing all data from Shared Preferences
         editor.putBoolean(IS_LOGIN,false);
-        editor.remove(KEY_NAME); // will delete key name
-        editor.remove(USER_TYPE);
+        editor.remove(KEY_FULL_NAME); // will delete key name
+        editor.remove(KEY_USERNAME);
         editor.remove(KEY_USER_ID);
-        editor.remove(KEY_MOBiLE);
+        editor.remove(KEY_P_IMAGE);
+
+        editor.remove(KEY_GENDER);
+        editor.remove(KEY_DOB);
+        editor.remove(KEY_PHONE_NUMBER);
 
         editor.clear();
         editor.commit();
@@ -167,19 +176,19 @@ public class UserSession {
     }
 
 
-    public void setCategory(String arrayList)
-    {
-        // Storing login value as TRUE
-        editor.putBoolean(IS_LOGIN, true);
-        // Storing name in pref
-        editor.putString(KEY_CATEGORY, arrayList);
-        editor.commit();
-    }
-
-    public String getCategory() {
-        return pref.getString(KEY_CATEGORY,"");
-
-    }
+//    public void setCategory(String arrayList)
+//    {
+//        // Storing login value as TRUE
+//        editor.putBoolean(IS_LOGIN, true);
+//        // Storing name in pref
+//        editor.putString(KEY_CATEGORY, arrayList);
+//        editor.commit();
+//    }
+//
+//    public String getCategory() {
+//        return pref.getString(KEY_CATEGORY,"");
+//
+//    }
 
 
 

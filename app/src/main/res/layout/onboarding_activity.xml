@@ -9,14 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/buttonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:cornerRadius="8dp"
         android:layout_centerHorizontal="true"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/AppTheme"
         android:text="Next" />
 
 

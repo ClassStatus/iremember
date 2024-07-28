@@ -7,7 +7,7 @@
 
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/lyt_parent"
-        style="@style/RippleStyleBlack"
+        style="@style/newTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true">
