@@ -66,7 +66,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item, parent, false);
         return new PostViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = postList.get(position);
@@ -77,6 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         name = user.get(UserSession.KEY_FULL_NAME);
         email = user.get(UserSession.KEY_EMAIL);
         mobile = user.get(UserSession.KEY_PHONE_NUMBER);
+        image = user.get(UserSession.KEY_P_IMAGE);
 
         if (post.getIsImage() == 1) {
             Glide.with(context)
@@ -124,6 +124,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             holder.showMore.setText("Show more");
         }
 
+        if(commentCount > 2){
+            holder.showMore.setVisibility(View.VISIBLE);
+        }else{
+            holder.showMore.setVisibility(View.GONE);
+        }
+
         holder.text_comment_count.setText(commentCount+" Comments");
         if(post.getContent_text().equals("")){
             holder.text_post_content.setText("Say something about this photo");
@@ -147,7 +153,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         });
 
         holder.deleteButton.setOnClickListener(v -> deleteRecording(holder));
-
+        Glide.with(context)
+                .load(image)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.logo_small_round)
+                .into(holder.login_user_icon);
 
         //remove when
         holder.content.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +197,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
-        ImageView content,post_image_profile;
+        ImageView content,post_image_profile,login_user_icon;
         TextView createdAt, showMore, text_comment_count,text_post_content,post_text_username;
         View login_user_comment;
         LinearLayout recording_section;
@@ -214,6 +224,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
             post_image_profile = itemView.findViewById(R.id.post_image_profile);
             post_text_username = itemView.findViewById(R.id.post_text_username);
+            login_user_icon = itemView.findViewById(R.id.login_user_icon);
         }
     }
 

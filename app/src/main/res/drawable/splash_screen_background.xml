@@ -4,9 +4,9 @@
     >
 
     <gradient
-        android:startColor="@color/blue_900"
-        android:centerColor="@color/blue_500"
-        android:endColor="@color/blue_100"
+        android:startColor="@color/colorPrimary"
+        android:centerColor="@color/colorPrimaryDark"
+        android:endColor="@color/colorPrimaryLight"
         android:angle="270"
         />
 

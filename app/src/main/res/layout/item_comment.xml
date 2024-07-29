@@ -61,19 +61,18 @@
 
     <!-- Single reply item -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="start"
+        android:background="@drawable/round"
         android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:layout_marginStart="30dp"
         android:gravity="center_vertical">
 
         <!-- Play/Pause button for audio -->
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_play"
-            android:visibility="invisible"
-            android:layout_marginEnd="10dp"/>
+
 
         <ImageView
             android:id="@+id/image_play_play"
@@ -87,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:src="@drawable/pause"
+            android:src="@drawable/stop"
             />
 
         <LinearLayout
@@ -96,9 +95,11 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/audiowave"/>
+                android:id="@+id/gifwave"
+                android:layout_width="133dp"
+                android:layout_height="30dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/aaaa"/>
 
         </LinearLayout>
 

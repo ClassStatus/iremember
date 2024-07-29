@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/splash_screen_background">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/backBtn"
@@ -19,14 +19,15 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
-            android:src="@drawable/back_arrow_white" />
+            android:src="@drawable/back_arrow_white"
+            app:tint="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Profile"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -38,11 +39,16 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"
+            app:tint="@color/black"
             android:src="@drawable/sign_out_icon" />
 
     </RelativeLayout>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -186,7 +192,7 @@
                     android:background="@drawable/btn_background_yellow"
                     android:gravity="center"
                     android:text="Save Now"
-                    android:textColor="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:textStyle="normal" />
 

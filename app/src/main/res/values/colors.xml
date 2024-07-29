@@ -3,9 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#1976D2</color>
-    <color name="colorPrimaryDark">#1565C0</color>
-    <color name="colorPrimaryLight">#1E88E5</color>
+    <color name="colorPrimary">#B65ABD</color>
+    <color name="colorPrimaryDark">#BB6AC1</color>
+    <color name="colorPrimaryLight">#DAADDD</color>
     <color name="colorAccent">#FF4081</color>
     <color name="viewfinder_laser">#ffcc0000</color>
     <color name="plazabase_color">#FC5A1B</color>

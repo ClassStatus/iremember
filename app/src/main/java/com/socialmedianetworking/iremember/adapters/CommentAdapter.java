@@ -1,7 +1,5 @@
 package com.socialmedianetworking.iremember.adapters;
 
-import static com.socialmedianetworking.iremember.util.Constant.UPLOAD_URL;
-
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -29,6 +27,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     private MediaPlayer mediaPlayer;
     private int currentlyPlayingPosition = -1;
     private RecyclerView recyclerView;
+    private boolean isPlaying = true;
 
     public CommentAdapter(List<Commentmodel> commentmodelList, Context context, boolean showAllComments, RecyclerView recyclerView) {
         this.commentmodelList = commentmodelList;
@@ -56,13 +55,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 .placeholder(R.drawable.logo_small_round)
                 .into(holder.image_profile_reply);
 
+
         // Handle the play and pause button visibility
         if (position == currentlyPlayingPosition) {
             holder.image_play_play.setVisibility(View.GONE);
             holder.image_play_pause.setVisibility(View.VISIBLE);
+            playGif(holder.gifwave);
         } else {
             holder.image_play_play.setVisibility(View.VISIBLE);
             holder.image_play_pause.setVisibility(View.GONE);
+            pauseGif(holder.gifwave);
         }
 
         // Handle play button click
@@ -78,6 +80,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     private void playAudio(String audioUrl, CommentViewHolder holder, int position) {
         // Stop any currently playing audio
+        handlePlayPauseButton(holder.gifwave, holder.image_play_play, holder.image_play_pause, true);
         if (currentlyPlayingPosition != -1 && currentlyPlayingPosition != position) {
             CommentViewHolder currentHolder = (CommentViewHolder) recyclerView.findViewHolderForAdapterPosition(currentlyPlayingPosition);
             if (currentHolder != null) {
@@ -127,7 +130,19 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         }
     }
 
+    private void handlePlayPauseButton(ImageView gifwave, ImageView playButton, ImageView pauseButton, boolean isPlaying) {
+        if (isPlaying) {
+            playButton.setVisibility(View.GONE);
+            pauseButton.setVisibility(View.VISIBLE);
+            playGif(gifwave);
+        } else {
+            playButton.setVisibility(View.VISIBLE);
+            pauseButton.setVisibility(View.GONE);
+            pauseGif(gifwave);
+        }
+    }
     private void stopAudio(CommentViewHolder holder, int position) {
+        handlePlayPauseButton(holder.gifwave, holder.image_play_play, holder.image_play_pause, false);
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
             mediaPlayer.reset();
@@ -159,10 +174,33 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         }
     }
 
+    private void pauseGif(ImageView gifwave) {
+        // Glide does not support pausing GIFs directly.
+        // You would need to restart the GIF from the beginning.
+        Glide.with(context)
+                .load(R.drawable.aaaa)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerInside()
+                .placeholder(R.drawable.aaaa)
+                .into(gifwave);
+    }
+    private void playGif(ImageView gifwave) {
+        // Glide will automatically play the GIF.
+                Glide.with(context)
+                .load(R.drawable.aa)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerInside()
+                .placeholder(R.drawable.aa)
+                .into(gifwave);
+
+    }
+
+
+
     public static class CommentViewHolder extends RecyclerView.ViewHolder {
         TextView username;
         TextView commentCreatedAt, text_reply;
-        ImageView image_play_play, image_play_pause, image_profile_reply;
+        ImageView image_play_play, image_play_pause, image_profile_reply,gifwave;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -172,6 +210,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             image_play_play = itemView.findViewById(R.id.image_play_play);
             text_reply = itemView.findViewById(R.id.text_reply);
             image_profile_reply = itemView.findViewById(R.id.image_profile_reply);
+            gifwave = itemView.findViewById(R.id.gifwave);
         }
     }
 }
